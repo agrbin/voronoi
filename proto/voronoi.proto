@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+import "descriptor.proto";
+
+package voronoi;
+
+enum Visibility {
+  // Default visibility - fields with this data are transmitted to all clients.
+  PUBLIC = 0;
+  // Any fields under 'User' with visiblity PRIVATE will not be transmitted to
+  // clients other than 'User::id'.
+  PRIVATE = 1;
+}
+
+extend google.protobuf.FieldOptions {
+  Visibility visibility = 314150;
+}
+
+message LatLng {
+  double lat = 1;
+  double lng = 2;
+}
+
+// The value of Linear at given time t is y0 + (t - t0_s) * dy.
+message Linear {
+  int64 t0_s = 1;
+  double y0 = 2;
+  double dy = 3;
+}
+
+message User {
+  string id = 1 [(visibility) = PRIVATE];
+
+  string name = 2;
+
+  LatLng totem = 3;
+
+  // score.dy = area_solo
+  Linear score = 4;
+}
+
+message Polygon {
+  repeated LatLng point = 1;
+}
+
+// User with user_id[i] has totem on position totem[i] and his voronoi region
+// is ccw bound by region[i].
+// To plot the region i one can draw triangles
+//  (totem[i], region[i][j], region[i][j+1])
+// for circular j.
+message Voronoi {
+  repeated LatLng totem = 1;
+  repeated string user_id = 2;
+  repeated Polygon region = 3;
+}
+
+// Everything we know is captured in this one message.
+message Db {
+  repeated User user = 1;
+  Voronoi voronoi = 2;
+}

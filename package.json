@@ -1,0 +1,13 @@
+{
+  "name": "voronoi",
+  "version": "0.0.1",
+  "description": "A stock-exchange-like online game.",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/agrbin/fitmarket.git"
+  },
+  "readme": "README.md",
+  "dependencies": {
+    "google-protobuf": "^3.3.0"
+  }
+}
