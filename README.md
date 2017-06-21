@@ -1,5 +1,4 @@
-Development
----
+# Development
 
 If you are changing protocol buffer interface, `protoc` program must be
 installed. This can be done at
@@ -11,3 +10,11 @@ by downloading `protoc-3.3.0-linux-x86_64.zip` if running 64bit linux or
 executable that can be copied up yours `/usr/local/bin/`.
 
 https://www.npmjs.com/package/rwlock
+
+## Directory structure
+
+* `client/static/` exposed by web server
+* `proto/` protocol buffer interface
+  * we also keep generated files here submitted to avoid people having to
+  invoke `protoc`
+
