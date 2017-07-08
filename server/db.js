@@ -10,10 +10,11 @@ var lockFile = require("lockfile");
 var fs = require("fs");
 var touch = require("touch");
 var path = require("path");
+var config = require("./config.js");
 
-var kLockFile = path.join(__dirname, "../data/lock");
-var kDbFile = path.join(__dirname, "../data/db.pb");
-var kDbHistory = path.join(__dirname, "../data/history/");
+var kLockFile = path.join(__dirname, config.db.lock_file);
+var kDbFile = path.join(__dirname, config.db.db_file);
+var kDbHistory = path.join(__dirname, config.db.history_dir);
 
 var log = Logger("db");
 

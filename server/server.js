@@ -1,6 +1,6 @@
 var GoogleAuth = require('google-auth-library');
 var auth = new GoogleAuth;
-var client_id = "156401229517-rvtl9j6qej6nu6sti7r5s1ii6iav52vk.apps.googleusercontent.com";
+var client_id = require("./config.js").client_id;
 var client = new auth.OAuth2(client_id, '', '');
 
 var connect = require('connect');
