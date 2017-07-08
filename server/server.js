@@ -1,13 +1,11 @@
-var GoogleAuth = require('google-auth-library');
-var auth = new GoogleAuth;
-var client_id = require("./config.js").client_id;
-var client = new auth.OAuth2(client_id, '', '');
+var config = require("./config.js");
 
 var connect = require('connect');
 var bodyParser = require('body-parser');
 var http = require('http');
 
 var app = connect();
+var auth = new (require("./auth.js"));
 
 app.use(bodyParser.urlencoded({
   extended: true
@@ -42,19 +40,15 @@ function name(profile) {
 // 
 // TODO TODO preciznije, napravi post endpoint ovdje i verificiraj id_token.
 app.use("/api/get", function(req, res){
-  client.verifyIdToken(
-    req.body.id_token,
-    client_id,
-    function(e, login) {
-      if (e) {
-        res.error(e);
-      } else {
-        var payload = login.getPayload();
-        var userid = payload['sub'];
-        res.json({name : name(payload)});
-      }
-    }
-  );
+  auth.verifyIdToken(req.body.id_token)
+    .then(function(profile) {
+      res.json({name : name(profile)});
+    })
+    .catch(function (err) {
+      res.error(err);
+    });
 });
 
-http.createServer(app).listen(53087);
+http
+  .createServer(app)
+  .listen(config.server.port);

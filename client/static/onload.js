@@ -29,7 +29,7 @@ $(window).on("load", function () {
         log,
         $("#api-status"),
         voronoi.config,
-        id_token
+        id_token,
       )).initialize();
   })
   .then(function (api) {
