@@ -28,89 +28,8 @@
 #include <google/protobuf/message.h>
 #include <google/protobuf/repeated_field.h>  // IWYU pragma: export
 #include <google/protobuf/extension_set.h>  // IWYU pragma: export
-#include <google/protobuf/generated_enum_reflection.h>
 #include <google/protobuf/unknown_field_set.h>
-#include "descriptor.pb.h"
 // @@protoc_insertion_point(includes)
-namespace google {
-namespace protobuf {
-class DescriptorProto;
-class DescriptorProtoDefaultTypeInternal;
-extern DescriptorProtoDefaultTypeInternal _DescriptorProto_default_instance_;
-class DescriptorProto_ExtensionRange;
-class DescriptorProto_ExtensionRangeDefaultTypeInternal;
-extern DescriptorProto_ExtensionRangeDefaultTypeInternal _DescriptorProto_ExtensionRange_default_instance_;
-class DescriptorProto_ReservedRange;
-class DescriptorProto_ReservedRangeDefaultTypeInternal;
-extern DescriptorProto_ReservedRangeDefaultTypeInternal _DescriptorProto_ReservedRange_default_instance_;
-class EnumDescriptorProto;
-class EnumDescriptorProtoDefaultTypeInternal;
-extern EnumDescriptorProtoDefaultTypeInternal _EnumDescriptorProto_default_instance_;
-class EnumOptions;
-class EnumOptionsDefaultTypeInternal;
-extern EnumOptionsDefaultTypeInternal _EnumOptions_default_instance_;
-class EnumValueDescriptorProto;
-class EnumValueDescriptorProtoDefaultTypeInternal;
-extern EnumValueDescriptorProtoDefaultTypeInternal _EnumValueDescriptorProto_default_instance_;
-class EnumValueOptions;
-class EnumValueOptionsDefaultTypeInternal;
-extern EnumValueOptionsDefaultTypeInternal _EnumValueOptions_default_instance_;
-class FieldDescriptorProto;
-class FieldDescriptorProtoDefaultTypeInternal;
-extern FieldDescriptorProtoDefaultTypeInternal _FieldDescriptorProto_default_instance_;
-class FieldOptions;
-class FieldOptionsDefaultTypeInternal;
-extern FieldOptionsDefaultTypeInternal _FieldOptions_default_instance_;
-class FileDescriptorProto;
-class FileDescriptorProtoDefaultTypeInternal;
-extern FileDescriptorProtoDefaultTypeInternal _FileDescriptorProto_default_instance_;
-class FileDescriptorSet;
-class FileDescriptorSetDefaultTypeInternal;
-extern FileDescriptorSetDefaultTypeInternal _FileDescriptorSet_default_instance_;
-class FileOptions;
-class FileOptionsDefaultTypeInternal;
-extern FileOptionsDefaultTypeInternal _FileOptions_default_instance_;
-class GeneratedCodeInfo;
-class GeneratedCodeInfoDefaultTypeInternal;
-extern GeneratedCodeInfoDefaultTypeInternal _GeneratedCodeInfo_default_instance_;
-class GeneratedCodeInfo_Annotation;
-class GeneratedCodeInfo_AnnotationDefaultTypeInternal;
-extern GeneratedCodeInfo_AnnotationDefaultTypeInternal _GeneratedCodeInfo_Annotation_default_instance_;
-class MessageOptions;
-class MessageOptionsDefaultTypeInternal;
-extern MessageOptionsDefaultTypeInternal _MessageOptions_default_instance_;
-class MethodDescriptorProto;
-class MethodDescriptorProtoDefaultTypeInternal;
-extern MethodDescriptorProtoDefaultTypeInternal _MethodDescriptorProto_default_instance_;
-class MethodOptions;
-class MethodOptionsDefaultTypeInternal;
-extern MethodOptionsDefaultTypeInternal _MethodOptions_default_instance_;
-class OneofDescriptorProto;
-class OneofDescriptorProtoDefaultTypeInternal;
-extern OneofDescriptorProtoDefaultTypeInternal _OneofDescriptorProto_default_instance_;
-class OneofOptions;
-class OneofOptionsDefaultTypeInternal;
-extern OneofOptionsDefaultTypeInternal _OneofOptions_default_instance_;
-class ServiceDescriptorProto;
-class ServiceDescriptorProtoDefaultTypeInternal;
-extern ServiceDescriptorProtoDefaultTypeInternal _ServiceDescriptorProto_default_instance_;
-class ServiceOptions;
-class ServiceOptionsDefaultTypeInternal;
-extern ServiceOptionsDefaultTypeInternal _ServiceOptions_default_instance_;
-class SourceCodeInfo;
-class SourceCodeInfoDefaultTypeInternal;
-extern SourceCodeInfoDefaultTypeInternal _SourceCodeInfo_default_instance_;
-class SourceCodeInfo_Location;
-class SourceCodeInfo_LocationDefaultTypeInternal;
-extern SourceCodeInfo_LocationDefaultTypeInternal _SourceCodeInfo_Location_default_instance_;
-class UninterpretedOption;
-class UninterpretedOptionDefaultTypeInternal;
-extern UninterpretedOptionDefaultTypeInternal _UninterpretedOption_default_instance_;
-class UninterpretedOption_NamePart;
-class UninterpretedOption_NamePartDefaultTypeInternal;
-extern UninterpretedOption_NamePartDefaultTypeInternal _UninterpretedOption_NamePart_default_instance_;
-}  // namespace protobuf
-}  // namespace google
 namespace voronoi {
 class Db;
 class DbDefaultTypeInternal;
@@ -148,27 +67,6 @@ void AddDescriptors();
 void InitDefaults();
 }  // namespace protobuf_voronoi_2eproto
 
-enum Visibility {
-  PUBLIC = 0,
-  PRIVATE = 1,
-  Visibility_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
-  Visibility_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
-};
-bool Visibility_IsValid(int value);
-const Visibility Visibility_MIN = PUBLIC;
-const Visibility Visibility_MAX = PRIVATE;
-const int Visibility_ARRAYSIZE = Visibility_MAX + 1;
-
-const ::google::protobuf::EnumDescriptor* Visibility_descriptor();
-inline const ::std::string& Visibility_Name(Visibility value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    Visibility_descriptor(), value);
-}
-inline bool Visibility_Parse(
-    const ::std::string& name, Visibility* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<Visibility>(
-    Visibility_descriptor(), name, value);
-}
 // ===================================================================
 
 class LatLng : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:voronoi.LatLng) */ {
@@ -444,7 +342,7 @@ class User : public ::google::protobuf::Message /* @@protoc_insertion_point(clas
   ::std::string* release_name();
   void set_allocated_name(::std::string* name);
 
-  // string email = 5 [(.voronoi.visibility) = PRIVATE];
+  // string email = 5;
   void clear_email();
   static const int kEmailFieldNumber = 5;
   const ::std::string& email() const;
@@ -794,10 +692,6 @@ class Db : public ::google::protobuf::Message /* @@protoc_insertion_point(class_
 };
 // ===================================================================
 
-static const int kVisibilityFieldNumber = 314150;
-extern ::google::protobuf::internal::ExtensionIdentifier< ::google::protobuf::FieldOptions,
-    ::google::protobuf::internal::EnumTypeTraits< ::voronoi::Visibility, ::voronoi::Visibility_IsValid>, 14, false >
-  visibility;
 
 // ===================================================================
 
@@ -1066,7 +960,7 @@ inline void User::set_allocated_score(::voronoi::Linear* score) {
   // @@protoc_insertion_point(field_set_allocated:voronoi.User.score)
 }
 
-// string email = 5 [(.voronoi.visibility) = PRIVATE];
+// string email = 5;
 inline void User::clear_email() {
   email_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -1375,20 +1269,6 @@ inline void Db::set_allocated_voronoi(::voronoi::Voronoi* voronoi) {
 
 
 }  // namespace voronoi
-
-#ifndef SWIG
-namespace google {
-namespace protobuf {
-
-template <> struct is_proto_enum< ::voronoi::Visibility> : ::google::protobuf::internal::true_type {};
-template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::voronoi::Visibility>() {
-  return ::voronoi::Visibility_descriptor();
-}
-
-}  // namespace protobuf
-}  // namespace google
-#endif  // SWIG
 
 // @@protoc_insertion_point(global_scope)
 

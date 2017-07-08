@@ -11,7 +11,7 @@ module.exports = function () {
   this.get = function (profile) {
     return maybeAddUser(profile).then(function () {
       return {
-        "db" : db.toObject(),
+        "db" : clean(db.toObject()),
         "current_user_index" : user_id_to_index[profile.id],
       };
     });
@@ -20,6 +20,15 @@ module.exports = function () {
   this.initialize = function () {
     return db_wrapper.initialize().then(buildIndex);
   };
+
+  // Removes emails from the database.
+  function clean(db) {
+    var db = JSON.parse(JSON.stringify(db));
+    for (var i = 0; i < db.userList.length; ++i) {
+      delete db.userList[i].email;
+    }
+    return db;
+  }
 
   // Adds a new user to the database if user currently doesn't exists.
   function maybeAddUser(profile) {

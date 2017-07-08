@@ -37,7 +37,6 @@ namespace protobuf_voronoi_2eproto {
 namespace {
 
 ::google::protobuf::Metadata file_level_metadata[6];
-const ::google::protobuf::EnumDescriptor* file_level_enum_descriptors[1];
 
 }  // namespace
 
@@ -134,7 +133,7 @@ void protobuf_AssignDescriptors() {
   ::google::protobuf::MessageFactory* factory = NULL;
   AssignDescriptors(
       "voronoi.proto", schemas, file_default_instances, TableStruct::offsets, factory,
-      file_level_metadata, file_level_enum_descriptors, NULL);
+      file_level_metadata, NULL, NULL);
 }
 
 void protobuf_AssignDescriptorsOnce() {
@@ -169,17 +168,12 @@ void TableStruct::InitDefaultsImpl() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::internal::InitProtobufDefaults();
-  ::google::protobuf::protobuf_descriptor_2eproto::InitDefaults();
   _LatLng_default_instance_.DefaultConstruct();
   _Linear_default_instance_.DefaultConstruct();
   _User_default_instance_.DefaultConstruct();
   _Polygon_default_instance_.DefaultConstruct();
   _Voronoi_default_instance_.DefaultConstruct();
   _Db_default_instance_.DefaultConstruct();
-  ::google::protobuf::internal::ExtensionSet::RegisterEnumExtension(
-    ::google::protobuf::FieldOptions::internal_default_instance(),
-    314150, 14, false, false,
-    &::voronoi::Visibility_IsValid);
   _User_default_instance_.get_mutable()->totem_ = const_cast< ::voronoi::LatLng*>(
       ::voronoi::LatLng::internal_default_instance());
   _User_default_instance_.get_mutable()->score_ = const_cast< ::voronoi::Linear*>(
@@ -195,27 +189,22 @@ void InitDefaults() {
 void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] = {
-      "\n\rvoronoi.proto\022\007voronoi\032\020descriptor.pro"
-      "to\"\"\n\006LatLng\022\013\n\003lat\030\001 \001(\001\022\013\n\003lng\030\002 \001(\001\"."
-      "\n\006Linear\022\014\n\004t0_s\030\001 \001(\003\022\n\n\002y0\030\002 \001(\001\022\n\n\002dy"
-      "\030\003 \001(\001\"v\n\004User\022\n\n\002id\030\001 \001(\t\022\014\n\004name\030\002 \001(\t"
-      "\022\036\n\005totem\030\003 \001(\0132\017.voronoi.LatLng\022\036\n\005scor"
-      "e\030\004 \001(\0132\017.voronoi.Linear\022\024\n\005email\030\005 \001(\tB"
-      "\005\260\262\231\001\001\")\n\007Polygon\022\036\n\005point\030\001 \003(\0132\017.voron"
-      "oi.LatLng\"\\\n\007Voronoi\022\036\n\005totem\030\001 \003(\0132\017.vo"
-      "ronoi.LatLng\022\017\n\007user_id\030\002 \003(\t\022 \n\006region\030"
-      "\003 \003(\0132\020.voronoi.Polygon\"D\n\002Db\022\033\n\004user\030\001 "
-      "\003(\0132\r.voronoi.User\022!\n\007voronoi\030\002 \001(\0132\020.vo"
-      "ronoi.Voronoi*%\n\nVisibility\022\n\n\006PUBLIC\020\000\022"
-      "\013\n\007PRIVATE\020\001:H\n\nvisibility\022\035.google.prot"
-      "obuf.FieldOptions\030\246\226\023 \001(\0162\023.voronoi.Visi"
-      "bilityb\006proto3"
+      "\n\rvoronoi.proto\022\007voronoi\"\"\n\006LatLng\022\013\n\003la"
+      "t\030\001 \001(\001\022\013\n\003lng\030\002 \001(\001\".\n\006Linear\022\014\n\004t0_s\030\001"
+      " \001(\003\022\n\n\002y0\030\002 \001(\001\022\n\n\002dy\030\003 \001(\001\"o\n\004User\022\n\n\002"
+      "id\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\022\036\n\005totem\030\003 \001(\0132\017."
+      "voronoi.LatLng\022\036\n\005score\030\004 \001(\0132\017.voronoi."
+      "Linear\022\r\n\005email\030\005 \001(\t\")\n\007Polygon\022\036\n\005poin"
+      "t\030\001 \003(\0132\017.voronoi.LatLng\"\\\n\007Voronoi\022\036\n\005t"
+      "otem\030\001 \003(\0132\017.voronoi.LatLng\022\017\n\007user_id\030\002"
+      " \003(\t\022 \n\006region\030\003 \003(\0132\020.voronoi.Polygon\"D"
+      "\n\002Db\022\033\n\004user\030\001 \003(\0132\r.voronoi.User\022!\n\007vor"
+      "onoi\030\002 \001(\0132\020.voronoi.Voronoib\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 574);
+      descriptor, 436);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "voronoi.proto", &protobuf_RegisterTypes);
-  ::google::protobuf::protobuf_descriptor_2eproto::AddDescriptors();
   ::google::protobuf::internal::OnShutdown(&TableStruct::Shutdown);
 }
 
@@ -231,20 +220,6 @@ struct StaticDescriptorInitializer {
 } static_descriptor_initializer;
 
 }  // namespace protobuf_voronoi_2eproto
-
-const ::google::protobuf::EnumDescriptor* Visibility_descriptor() {
-  protobuf_voronoi_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_voronoi_2eproto::file_level_enum_descriptors[0];
-}
-bool Visibility_IsValid(int value) {
-  switch (value) {
-    case 0:
-    case 1:
-      return true;
-    default:
-      return false;
-  }
-}
 
 
 // ===================================================================
@@ -1043,7 +1018,7 @@ bool User::MergePartialFromCodedStream(
         break;
       }
 
-      // string email = 5 [(.voronoi.visibility) = PRIVATE];
+      // string email = 5;
       case 5: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(42u)) {
@@ -1118,7 +1093,7 @@ void User::SerializeWithCachedSizes(
       4, *this->score_, output);
   }
 
-  // string email = 5 [(.voronoi.visibility) = PRIVATE];
+  // string email = 5;
   if (this->email().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->email().data(), this->email().length(),
@@ -1173,7 +1148,7 @@ void User::SerializeWithCachedSizes(
         4, *this->score_, deterministic, target);
   }
 
-  // string email = 5 [(.voronoi.visibility) = PRIVATE];
+  // string email = 5;
   if (this->email().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->email().data(), this->email().length(),
@@ -1206,7 +1181,7 @@ size_t User::ByteSizeLong() const {
         this->name());
   }
 
-  // string email = 5 [(.voronoi.visibility) = PRIVATE];
+  // string email = 5;
   if (this->email().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
@@ -1499,7 +1474,7 @@ void User::set_allocated_score(::voronoi::Linear* score) {
   // @@protoc_insertion_point(field_set_allocated:voronoi.User.score)
 }
 
-// string email = 5 [(.voronoi.visibility) = PRIVATE];
+// string email = 5;
 void User::clear_email() {
   email_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -2588,9 +2563,6 @@ void Db::set_allocated_voronoi(::voronoi::Voronoi* voronoi) {
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
-::google::protobuf::internal::ExtensionIdentifier< ::google::protobuf::FieldOptions,
-    ::google::protobuf::internal::EnumTypeTraits< ::voronoi::Visibility, ::voronoi::Visibility_IsValid>, 14, false >
-  visibility(kVisibilityFieldNumber, static_cast< ::voronoi::Visibility >(0));
 
 // @@protoc_insertion_point(namespace_scope)
 

@@ -1,20 +1,6 @@
 syntax = "proto3";
 
-import "descriptor.proto";
-
 package voronoi;
-
-enum Visibility {
-  // Default visibility - fields with this data are transmitted to all clients.
-  PUBLIC = 0;
-  // Any fields under 'User' with visiblity PRIVATE will not be transmitted to
-  // clients other than 'User::id'.
-  PRIVATE = 1;
-}
-
-extend google.protobuf.FieldOptions {
-  Visibility visibility = 314150;
-}
 
 message LatLng {
   double lat = 1;
@@ -38,7 +24,8 @@ message User {
   // score.dy = area_solo
   Linear score = 4;
 
-  string email = 5 [(visibility) = PRIVATE];
+  // We clear this field prior to sending the database to the client.
+  string email = 5;
 }
 
 message Polygon {
