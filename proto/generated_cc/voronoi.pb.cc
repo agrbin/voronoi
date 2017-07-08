@@ -85,6 +85,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] = {
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(User, name_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(User, totem_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(User, score_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(User, email_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Polygon, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -112,9 +113,9 @@ static const ::google::protobuf::internal::MigrationSchema schemas[] = {
   { 0, -1, sizeof(LatLng)},
   { 7, -1, sizeof(Linear)},
   { 15, -1, sizeof(User)},
-  { 24, -1, sizeof(Polygon)},
-  { 30, -1, sizeof(Voronoi)},
-  { 38, -1, sizeof(Db)},
+  { 25, -1, sizeof(Polygon)},
+  { 31, -1, sizeof(Voronoi)},
+  { 39, -1, sizeof(Db)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -197,20 +198,21 @@ void AddDescriptorsImpl() {
       "\n\rvoronoi.proto\022\007voronoi\032\020descriptor.pro"
       "to\"\"\n\006LatLng\022\013\n\003lat\030\001 \001(\001\022\013\n\003lng\030\002 \001(\001\"."
       "\n\006Linear\022\014\n\004t0_s\030\001 \001(\003\022\n\n\002y0\030\002 \001(\001\022\n\n\002dy"
-      "\030\003 \001(\001\"g\n\004User\022\021\n\002id\030\001 \001(\tB\005\260\262\231\001\001\022\014\n\004nam"
-      "e\030\002 \001(\t\022\036\n\005totem\030\003 \001(\0132\017.voronoi.LatLng\022"
-      "\036\n\005score\030\004 \001(\0132\017.voronoi.Linear\")\n\007Polyg"
-      "on\022\036\n\005point\030\001 \003(\0132\017.voronoi.LatLng\"\\\n\007Vo"
-      "ronoi\022\036\n\005totem\030\001 \003(\0132\017.voronoi.LatLng\022\017\n"
-      "\007user_id\030\002 \003(\t\022 \n\006region\030\003 \003(\0132\020.voronoi"
-      ".Polygon\"D\n\002Db\022\033\n\004user\030\001 \003(\0132\r.voronoi.U"
-      "ser\022!\n\007voronoi\030\002 \001(\0132\020.voronoi.Voronoi*%"
-      "\n\nVisibility\022\n\n\006PUBLIC\020\000\022\013\n\007PRIVATE\020\001:H\n"
-      "\nvisibility\022\035.google.protobuf.FieldOptio"
-      "ns\030\246\226\023 \001(\0162\023.voronoi.Visibilityb\006proto3"
+      "\030\003 \001(\001\"v\n\004User\022\n\n\002id\030\001 \001(\t\022\014\n\004name\030\002 \001(\t"
+      "\022\036\n\005totem\030\003 \001(\0132\017.voronoi.LatLng\022\036\n\005scor"
+      "e\030\004 \001(\0132\017.voronoi.Linear\022\024\n\005email\030\005 \001(\tB"
+      "\005\260\262\231\001\001\")\n\007Polygon\022\036\n\005point\030\001 \003(\0132\017.voron"
+      "oi.LatLng\"\\\n\007Voronoi\022\036\n\005totem\030\001 \003(\0132\017.vo"
+      "ronoi.LatLng\022\017\n\007user_id\030\002 \003(\t\022 \n\006region\030"
+      "\003 \003(\0132\020.voronoi.Polygon\"D\n\002Db\022\033\n\004user\030\001 "
+      "\003(\0132\r.voronoi.User\022!\n\007voronoi\030\002 \001(\0132\020.vo"
+      "ronoi.Voronoi*%\n\nVisibility\022\n\n\006PUBLIC\020\000\022"
+      "\013\n\007PRIVATE\020\001:H\n\nvisibility\022\035.google.prot"
+      "obuf.FieldOptions\030\246\226\023 \001(\0162\023.voronoi.Visi"
+      "bilityb\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 559);
+      descriptor, 574);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "voronoi.proto", &protobuf_RegisterTypes);
   ::google::protobuf::protobuf_descriptor_2eproto::AddDescriptors();
@@ -870,6 +872,7 @@ const int User::kIdFieldNumber;
 const int User::kNameFieldNumber;
 const int User::kTotemFieldNumber;
 const int User::kScoreFieldNumber;
+const int User::kEmailFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 User::User()
@@ -893,6 +896,10 @@ User::User(const User& from)
   if (from.name().size() > 0) {
     name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
   }
+  email_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.email().size() > 0) {
+    email_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.email_);
+  }
   if (from.has_totem()) {
     totem_ = new ::voronoi::LatLng(*from.totem_);
   } else {
@@ -909,6 +916,7 @@ User::User(const User& from)
 void User::SharedCtor() {
   id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  email_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&totem_, 0, reinterpret_cast<char*>(&score_) -
     reinterpret_cast<char*>(&totem_) + sizeof(score_));
   _cached_size_ = 0;
@@ -922,6 +930,7 @@ User::~User() {
 void User::SharedDtor() {
   id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  email_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != internal_default_instance()) {
     delete totem_;
   }
@@ -957,6 +966,7 @@ void User::Clear() {
 // @@protoc_insertion_point(message_clear_start:voronoi.User)
   id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  email_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (GetArenaNoVirtual() == NULL && totem_ != NULL) {
     delete totem_;
   }
@@ -977,7 +987,7 @@ bool User::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // string id = 1 [(.voronoi.visibility) = PRIVATE];
+      // string id = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(10u)) {
@@ -1033,6 +1043,22 @@ bool User::MergePartialFromCodedStream(
         break;
       }
 
+      // string email = 5 [(.voronoi.visibility) = PRIVATE];
+      case 5: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(42u)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_email()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->email().data(), this->email().length(),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "voronoi.User.email"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0 ||
@@ -1060,7 +1086,7 @@ void User::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // string id = 1 [(.voronoi.visibility) = PRIVATE];
+  // string id = 1;
   if (this->id().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->id().data(), this->id().length(),
@@ -1092,6 +1118,16 @@ void User::SerializeWithCachedSizes(
       4, *this->score_, output);
   }
 
+  // string email = 5 [(.voronoi.visibility) = PRIVATE];
+  if (this->email().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->email().data(), this->email().length(),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "voronoi.User.email");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      5, this->email(), output);
+  }
+
   // @@protoc_insertion_point(serialize_end:voronoi.User)
 }
 
@@ -1101,7 +1137,7 @@ void User::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // string id = 1 [(.voronoi.visibility) = PRIVATE];
+  // string id = 1;
   if (this->id().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->id().data(), this->id().length(),
@@ -1137,6 +1173,17 @@ void User::SerializeWithCachedSizes(
         4, *this->score_, deterministic, target);
   }
 
+  // string email = 5 [(.voronoi.visibility) = PRIVATE];
+  if (this->email().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->email().data(), this->email().length(),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "voronoi.User.email");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        5, this->email(), target);
+  }
+
   // @@protoc_insertion_point(serialize_to_array_end:voronoi.User)
   return target;
 }
@@ -1145,7 +1192,7 @@ size_t User::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:voronoi.User)
   size_t total_size = 0;
 
-  // string id = 1 [(.voronoi.visibility) = PRIVATE];
+  // string id = 1;
   if (this->id().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
@@ -1157,6 +1204,13 @@ size_t User::ByteSizeLong() const {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->name());
+  }
+
+  // string email = 5 [(.voronoi.visibility) = PRIVATE];
+  if (this->email().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->email());
   }
 
   // .voronoi.LatLng totem = 3;
@@ -1210,6 +1264,10 @@ void User::MergeFrom(const User& from) {
 
     name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
   }
+  if (from.email().size() > 0) {
+
+    email_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.email_);
+  }
   if (from.has_totem()) {
     mutable_totem()->::voronoi::LatLng::MergeFrom(from.totem());
   }
@@ -1243,6 +1301,7 @@ void User::Swap(User* other) {
 void User::InternalSwap(User* other) {
   id_.Swap(&other->id_);
   name_.Swap(&other->name_);
+  email_.Swap(&other->email_);
   std::swap(totem_, other->totem_);
   std::swap(score_, other->score_);
   std::swap(_cached_size_, other->_cached_size_);
@@ -1256,7 +1315,7 @@ void User::InternalSwap(User* other) {
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
 // User
 
-// string id = 1 [(.voronoi.visibility) = PRIVATE];
+// string id = 1;
 void User::clear_id() {
   id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -1438,6 +1497,59 @@ void User::set_allocated_score(::voronoi::Linear* score) {
     
   }
   // @@protoc_insertion_point(field_set_allocated:voronoi.User.score)
+}
+
+// string email = 5 [(.voronoi.visibility) = PRIVATE];
+void User::clear_email() {
+  email_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+const ::std::string& User::email() const {
+  // @@protoc_insertion_point(field_get:voronoi.User.email)
+  return email_.GetNoArena();
+}
+void User::set_email(const ::std::string& value) {
+  
+  email_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:voronoi.User.email)
+}
+#if LANG_CXX11
+void User::set_email(::std::string&& value) {
+  
+  email_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:voronoi.User.email)
+}
+#endif
+void User::set_email(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  email_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:voronoi.User.email)
+}
+void User::set_email(const char* value, size_t size) {
+  
+  email_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:voronoi.User.email)
+}
+::std::string* User::mutable_email() {
+  
+  // @@protoc_insertion_point(field_mutable:voronoi.User.email)
+  return email_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+::std::string* User::release_email() {
+  // @@protoc_insertion_point(field_release:voronoi.User.email)
+  
+  return email_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+void User::set_allocated_email(::std::string* email) {
+  if (email != NULL) {
+    
+  } else {
+    
+  }
+  email_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), email);
+  // @@protoc_insertion_point(field_set_allocated:voronoi.User.email)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS

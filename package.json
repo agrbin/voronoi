@@ -8,10 +8,16 @@
   },
   "readme": "README.md",
   "dependencies": {
+    "async-lock": "^1.0.0",
     "body-parser": "^1.17.2",
     "connect": "^3.6.2",
     "google-auth-library": "^0.10.0",
     "google-protobuf": "^3.3.0",
-    "http": "0.0.0"
+    "http": "0.0.0",
+    "lockfile": "^1.0.3",
+    "locks": "^0.2.2",
+    "touch": "^3.1.0",
+    "util": "^0.10.3",
+    "util.promisify": "^1.0.0"
   }
 }

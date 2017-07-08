@@ -416,7 +416,7 @@ class User : public ::google::protobuf::Message /* @@protoc_insertion_point(clas
 
   // accessors -------------------------------------------------------
 
-  // string id = 1 [(.voronoi.visibility) = PRIVATE];
+  // string id = 1;
   void clear_id();
   static const int kIdFieldNumber = 1;
   const ::std::string& id() const;
@@ -444,6 +444,20 @@ class User : public ::google::protobuf::Message /* @@protoc_insertion_point(clas
   ::std::string* release_name();
   void set_allocated_name(::std::string* name);
 
+  // string email = 5 [(.voronoi.visibility) = PRIVATE];
+  void clear_email();
+  static const int kEmailFieldNumber = 5;
+  const ::std::string& email() const;
+  void set_email(const ::std::string& value);
+  #if LANG_CXX11
+  void set_email(::std::string&& value);
+  #endif
+  void set_email(const char* value);
+  void set_email(const char* value, size_t size);
+  ::std::string* mutable_email();
+  ::std::string* release_email();
+  void set_allocated_email(::std::string* email);
+
   // .voronoi.LatLng totem = 3;
   bool has_totem() const;
   void clear_totem();
@@ -468,6 +482,7 @@ class User : public ::google::protobuf::Message /* @@protoc_insertion_point(clas
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::ArenaStringPtr id_;
   ::google::protobuf::internal::ArenaStringPtr name_;
+  ::google::protobuf::internal::ArenaStringPtr email_;
   ::voronoi::LatLng* totem_;
   ::voronoi::Linear* score_;
   mutable int _cached_size_;
@@ -867,7 +882,7 @@ inline void Linear::set_dy(double value) {
 
 // User
 
-// string id = 1 [(.voronoi.visibility) = PRIVATE];
+// string id = 1;
 inline void User::clear_id() {
   id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -1049,6 +1064,59 @@ inline void User::set_allocated_score(::voronoi::Linear* score) {
     
   }
   // @@protoc_insertion_point(field_set_allocated:voronoi.User.score)
+}
+
+// string email = 5 [(.voronoi.visibility) = PRIVATE];
+inline void User::clear_email() {
+  email_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& User::email() const {
+  // @@protoc_insertion_point(field_get:voronoi.User.email)
+  return email_.GetNoArena();
+}
+inline void User::set_email(const ::std::string& value) {
+  
+  email_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:voronoi.User.email)
+}
+#if LANG_CXX11
+inline void User::set_email(::std::string&& value) {
+  
+  email_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:voronoi.User.email)
+}
+#endif
+inline void User::set_email(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  email_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:voronoi.User.email)
+}
+inline void User::set_email(const char* value, size_t size) {
+  
+  email_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:voronoi.User.email)
+}
+inline ::std::string* User::mutable_email() {
+  
+  // @@protoc_insertion_point(field_mutable:voronoi.User.email)
+  return email_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* User::release_email() {
+  // @@protoc_insertion_point(field_release:voronoi.User.email)
+  
+  return email_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void User::set_allocated_email(::std::string* email) {
+  if (email != NULL) {
+    
+  } else {
+    
+  }
+  email_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), email);
+  // @@protoc_insertion_point(field_set_allocated:voronoi.User.email)
 }
 
 // -------------------------------------------------------------------

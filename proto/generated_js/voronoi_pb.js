@@ -428,7 +428,8 @@ proto.voronoi.User.toObject = function(includeInstance, msg) {
     id: jspb.Message.getFieldWithDefault(msg, 1, ""),
     name: jspb.Message.getFieldWithDefault(msg, 2, ""),
     totem: (f = msg.getTotem()) && proto.voronoi.LatLng.toObject(includeInstance, f),
-    score: (f = msg.getScore()) && proto.voronoi.Linear.toObject(includeInstance, f)
+    score: (f = msg.getScore()) && proto.voronoi.Linear.toObject(includeInstance, f),
+    email: jspb.Message.getFieldWithDefault(msg, 5, "")
   };
 
   if (includeInstance) {
@@ -482,6 +483,10 @@ proto.voronoi.User.deserializeBinaryFromReader = function(msg, reader) {
       var value = new proto.voronoi.Linear;
       reader.readMessage(value,proto.voronoi.Linear.deserializeBinaryFromReader);
       msg.setScore(value);
+      break;
+    case 5:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setEmail(value);
       break;
     default:
       reader.skipField();
@@ -539,6 +544,13 @@ proto.voronoi.User.serializeBinaryToWriter = function(message, writer) {
       4,
       f,
       proto.voronoi.Linear.serializeBinaryToWriter
+    );
+  }
+  f = message.getEmail();
+  if (f.length > 0) {
+    writer.writeString(
+      5,
+      f
     );
   }
 };
@@ -631,6 +643,21 @@ proto.voronoi.User.prototype.clearScore = function() {
  */
 proto.voronoi.User.prototype.hasScore = function() {
   return jspb.Message.getField(this, 4) != null;
+};
+
+
+/**
+ * optional string email = 5;
+ * @return {string}
+ */
+proto.voronoi.User.prototype.getEmail = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
+};
+
+
+/** @param {string} value */
+proto.voronoi.User.prototype.setEmail = function(value) {
+  jspb.Message.setField(this, 5, value);
 };
 
 

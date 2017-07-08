@@ -29,7 +29,7 @@ message Linear {
 }
 
 message User {
-  string id = 1 [(visibility) = PRIVATE];
+  string id = 1;
 
   string name = 2;
 
@@ -37,6 +37,8 @@ message User {
 
   // score.dy = area_solo
   Linear score = 4;
+
+  string email = 5 [(visibility) = PRIVATE];
 }
 
 message Polygon {
