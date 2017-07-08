@@ -6,9 +6,9 @@ voronoi.Api = function (
       id_token,
     ) {
   var that = this;
-  var profile = {
-    name : null
-  };
+  var current_user_index = null;
+  var profile = null;
+  var db = null;
 
   function getEndpoint(endpoint) {
     return config.backend.api + endpoint;
@@ -39,7 +39,9 @@ voronoi.Api = function (
         if ("error" in data) {
           return Promise.reject(new Error(data.error));
         } else {
-          profile.name = data.name;
+          db = data.db;
+          current_user_index = data.current_user_index;
+          profile = data.db.userList[current_user_index];
           return that;
         }
       });
