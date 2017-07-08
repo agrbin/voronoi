@@ -8,6 +8,7 @@ var voronoi = require("../proto/generated_js/voronoi_pb.js")
 var Logger = require("./logger.js");
 var lockFile = require("lockfile");
 var fs = require("fs");
+var onExit = require('on-exit');
 var touch = require("touch");
 var path = require("path");
 var config = require("./config.js");
@@ -16,14 +17,14 @@ var kLockFile = path.join(__dirname, config.db.lock_file);
 var kDbFile = path.join(__dirname, config.db.db_file);
 var kDbHistory = path.join(__dirname, config.db.history_dir);
 
-var log = Logger("db");
+var log = new (require("./logger.js"))("db");
 
 // One mutex per process.
 // Inter-process locking is done with lockfile.
 var AsyncLock = require('async-lock');
 var flushLock = new AsyncLock();
 
-exports = function () {
+module.exports = function () {
   var snapshot = null;
   var that = this;
 
@@ -125,3 +126,9 @@ exports = function () {
     return true;
   }
 };
+
+
+onExit(function () {
+  log("on-exit: cleaning the lock.");
+  lockFile.unlockSync(kLockFile);
+});

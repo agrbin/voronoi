@@ -16,6 +16,7 @@
     "http": "0.0.0",
     "lockfile": "^1.0.3",
     "locks": "^0.2.2",
+    "on-exit": "^1.0.1",
     "touch": "^3.1.0",
     "util": "^0.10.3",
     "util.promisify": "^1.0.0"

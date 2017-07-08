@@ -1,3 +1,7 @@
+// server.js takes care of
+// * serving
+// * authentication
+// * reporting back results or errors
 var config = require("./config.js");
 
 var connect = require('connect');
@@ -6,6 +10,9 @@ var http = require('http');
 
 var app = connect();
 var auth = new (require("./auth.js"));
+var game = new (require("./game.js"));
+
+var log = new (require("./logger.js"))("server");
 
 app.use(bodyParser.urlencoded({
   extended: true
@@ -23,14 +30,6 @@ app.use(function (req, res, next) {
   next();
 });
 
-function name(profile) {
-  var result = profile.given_name + profile.family_name;
-  result = result
-    .replace(/[aeiou]/ig, '')
-    .toLowerCase();
-  return "#" + result;
-}
-
 // stao sam kad pokusavam prenjeti client id od forntenda na backend na crypto
 // siguran nacin.
 // https://developers.google.com/identity/sign-in/web/backend-auth
@@ -38,17 +37,22 @@ function name(profile) {
 // kad uspijem poslat ajax i primit ga na serveru i rec "dobar si",
 // server bi polako vec trebao poceti graditi rest i kod kako ce biti na kraju.
 // 
-// TODO TODO preciznije, napravi post endpoint ovdje i verificiraj id_token.
 app.use("/api/get", function(req, res){
   auth.verifyIdToken(req.body.id_token)
-    .then(function(profile) {
-      res.json({name : name(profile)});
+    .then(function (profile) {
+      return game.get(profile);
+    })
+    .then(function (result) {
+      res.json(result);
     })
     .catch(function (err) {
       res.error(err);
     });
 });
 
-http
-  .createServer(app)
-  .listen(config.server.port);
+game.initialize().then(function () {
+  log("initialized. listening on ", config.server.port);
+  http
+    .createServer(app)
+    .listen(config.server.port);
+});

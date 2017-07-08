@@ -3,6 +3,14 @@ var GoogleAuth = require('google-auth-library');
 var auth = new GoogleAuth;
 var promisify = require("util.promisify");
 
+function name(profile) {
+  var result = profile.given_name + profile.family_name;
+  result = result
+    .replace(/[aeiou]/ig, '')
+    .toLowerCase();
+  return "#" + result;
+}
+
 // note, this class uses a global state to get client_id and stuff.
 module.exports = function () {
   var client = new auth.OAuth2(config.auth.client_id, '', '');
@@ -15,7 +23,12 @@ module.exports = function () {
           if (e) {
             return reject(e);
           }
-          return resolve(login.getPayload());
+          payload = login.getPayload();
+          return resolve({
+            id : payload.sub,
+            email : payload.email,
+            name : name(payload),
+          });
         });
     });
   };
