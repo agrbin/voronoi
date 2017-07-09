@@ -8,18 +8,49 @@ module.exports = function () {
   var db = null;
   var user_id_to_index = {}
 
+  // NOTE: once this method calls into voronoi generation, we need to lock it.
+  // Why? user A changes his location and starts voronoi computation wiht graph
+  // G0.
+  // user B changes his location and starts computation with G0.
+  // computation for user A finishes.
+  // computation for user B finishes and changes of A are lost.
+  this.change = function (profile, data) {
+    var user = getUser(profile);
+    if (user === false) {
+      return Promise.reject("user not yet registered.");
+    }
+    if ("name" in data) {
+      if (data.name.match(/^[a-z]+$/) === null) {
+        return Promise.reject("name should be all lowercase letters");
+      }
+      if (data.name.length > 8) {
+        return Promise.reject("name too long.");
+      }
+      user.setName(data.name);
+      return db_wrapper.flush()
+        .then(function () {
+          return buildResponse(profile);
+        });
+    }
+  };
+
   this.get = function (profile) {
-    return maybeAddUser(profile).then(function () {
-      return {
-        "db" : clean(db.toObject()),
-        "current_user_index" : user_id_to_index[profile.id],
-      };
-    });
+    return maybeAddUser(profile)
+      .then(function () {
+        return buildResponse(profile);
+      });
   };
 
   this.initialize = function () {
     return db_wrapper.initialize().then(buildIndex);
   };
+
+  function buildResponse(profile) {
+    return {
+      "db" : clean(db.toObject()),
+      "current_user_index" : user_id_to_index[profile.id],
+    };
+  }
 
   // Removes emails from the database.
   function clean(db) {
@@ -30,9 +61,17 @@ module.exports = function () {
     return db;
   }
 
+  function getUser(profile) {
+    if (profile.id in user_id_to_index) {
+      return db.getUserList()[user_id_to_index[profile.id]];
+    } else {
+      return false;
+    }
+  }
+
   // Adds a new user to the database if user currently doesn't exists.
   function maybeAddUser(profile) {
-    if (profile.id in user_id_to_index) {
+    if (getUser(profile) !== false) {
       return Promise.resolve();
     } else {
       var user = new voronoi.User();

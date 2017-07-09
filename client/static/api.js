@@ -11,6 +11,11 @@ voronoi.Api = function (
     return config.backend.api + endpoint;
   }
 
+  // Returns a promise:
+  // - if not rejected this is a healthy data message
+  // - if rejected this is a data message with app error
+  // If network error occurs, it will fatal-out and reject a promise with an
+  // empty dict.
   function query(endpoint, data) {
     data = Object.assign(data || {}, {
       id_token: id_token
@@ -22,17 +27,34 @@ voronoi.Api = function (
       dataType: "json",
       method: "POST",
       url: getEndpoint(endpoint),
-    })).then(function (result) {
+    }))
+    .then(function (result) {
       ui.apiStatus("");
       return result;
-    }).catch(function (err) {
+    })
+    // this is failure on network stack.
+    .catch(function (err) {
+      log.onFatal(err);
+      return Promise.reject({});
+    })
+    .then(function (result) {
       ui.apiStatus("");
-      return Promise.reject(err);
-    });;
+      if ("error" in result) {
+        return Promise.reject(result);
+      }
+      return result;
+    });
   }
+
+  // data should be name, lat, lng.
+  // See query for promise behavior on network error.
+  this.change = function (data) {
+    return query("change", data);
+  };
 
   // Returns a promise with first_get_respone if server recognizes our
   // id_token.
+  // See query for promise behavior on network error.
   this.initialize = function (id_token_) {
     id_token = id_token_;
     log("initializing..");

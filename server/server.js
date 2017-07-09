@@ -30,17 +30,10 @@ app.use(function (req, res, next) {
   next();
 });
 
-// stao sam kad pokusavam prenjeti client id od forntenda na backend na crypto
-// siguran nacin.
-// https://developers.google.com/identity/sign-in/web/backend-auth
-// https://www.npmjs.com/package/connect
-// kad uspijem poslat ajax i primit ga na serveru i rec "dobar si",
-// server bi polako vec trebao poceti graditi rest i kod kako ce biti na kraju.
-// 
-app.use("/api/get", function(req, res){
+function process_api(handler, req, res) {
   auth.verifyIdToken(req.body.id_token)
     .then(function (profile) {
-      return game.get(profile);
+      return handler(profile, req.body);
     })
     .then(function (result) {
       res.json(result);
@@ -48,7 +41,22 @@ app.use("/api/get", function(req, res){
     .catch(function (err) {
       res.error(err);
     });
-});
+}
+
+// stao sam kad pokusavam prenjeti client id od forntenda na backend na crypto
+// siguran nacin.
+// https://developers.google.com/identity/sign-in/web/backend-auth
+// https://www.npmjs.com/package/connect
+// kad uspijem poslat ajax i primit ga na serveru i rec "dobar si",
+// server bi polako vec trebao poceti graditi rest i kod kako ce biti na kraju.
+// 
+app.use(
+    "/api/get",
+    process_api.bind(null, game.get));
+
+app.use(
+    "/api/change",
+    process_api.bind(null, game.change));
 
 game.initialize().then(function () {
   log("initialized. listening on ", config.server.port);
