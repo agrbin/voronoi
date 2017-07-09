@@ -1,6 +1,6 @@
 $(window).on("load", function () {
   var ui = new voronoi.UI();
-  var logger = new voronoi.Logger();
+  var logger = new voronoi.Logger(ui);
   var auth = new voronoi.Auth(
     logger.getLog("auth"),
     ui,

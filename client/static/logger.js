@@ -1,4 +1,6 @@
-voronoi.Logger = function () {
+voronoi.Logger = function (
+    ui,
+) {
 
   var t0 = (new Date()).getTime();
 
@@ -8,6 +10,7 @@ voronoi.Logger = function () {
       var ms = (new Date()).getTime() - t0;
       args.unshift("+" + ms + " ms [" + prefix + "] : ");
       console.log.apply(window, args);
+      ui.appendLog(args);
     };
   };
 

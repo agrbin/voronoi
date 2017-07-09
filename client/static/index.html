@@ -1,6 +1,14 @@
 <!doctype html>
-
+<html lang="en">
 <head>
+  <meta charset="utf-8">
+  <title>Voronoi Project</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+  <link rel="stylesheet" href="css/freestyler.css">
+  <!--link rel="icon" type="image/png" href="images/favicon.png"-->
+
   <script src="config.js"></script>
   <script src="api.js"></script>
   <script src="auth.js"></script>
@@ -13,7 +21,9 @@
 </head>
 
 <body>
-  <h1 class="init">initializing..</h1>
+  <div id="init">
+    <h1>initializing..</h1>
+  </div>
 
   <div id="auth" style="display: none;">
     <button
@@ -34,5 +44,45 @@
 
   <div id="api-status"></div>
 
-  <span class="name"></span>
+  <div id="game-ui" class="container" style="display: none;">
+    <div class="view">
+      <span class="name"></span>
+      <a class="button make-a-change" href="#">Make a change</a>
+    </div>
+
+    <div class="update">
+      <form>
+        <div class="row">
+          <h3>Change your details</h3>
+        </div>
+        <div class="row">
+          <label>
+            Name
+            <input class="u-full-width" type="text" id="update-name">
+          </label>
+        </div>
+        <div class="row">
+          <h3>Change totem location</h3>
+        </div>
+        <div class="row">
+          <div class="six columns">
+            <label>
+              Latitude
+              <input class="u-full-width" type="text" id="update-lat">
+            </label>
+          </div>
+            <div class="six columns">
+            <label>
+              Longitude
+              <input class="u-full-width" type="text" id="update-lng">
+            </label>
+          </div>
+        </div>
+        <div class="row">
+          <input class="button-primary" type="submit" value="Submit">
+          <input class="button-secondary cancel" type="button" value="Get back!">
+        </div>
+      </form>
+    </div>
 </body>
+</html>
