@@ -1,14 +1,11 @@
-// id_token obtained by user.getAuthResponse().id_token
 voronoi.Api = function (
-      log,
-      $statusDiv,
-      config,
-      id_token,
-    ) {
+    log,
+    ui,
+    config,
+) {
+  // id_token obtained by user.getAuthResponse().id_token
   var that = this;
-  var current_user_index = null;
-  var profile = null;
-  var db = null;
+  var id_token = null;
 
   function getEndpoint(endpoint) {
     return config.backend.api + endpoint;
@@ -18,7 +15,7 @@ voronoi.Api = function (
     data = Object.assign(data || {}, {
       id_token: id_token
     });
-    $statusDiv.text("api: " + endpoint + " loading..");
+    ui.apiStatus("api: " + endpoint + " loading..");
     return Promise.resolve($.ajax({
       cache: false,
       data: data,
@@ -26,28 +23,27 @@ voronoi.Api = function (
       method: "POST",
       url: getEndpoint(endpoint),
     })).then(function (result) {
-      $statusDiv.text("");
+      ui.apiStatus("");
       return result;
-    });
+    }).catch(function (err) {
+      ui.apiStatus("");
+      return Promise.reject(err);
+    });;
   }
 
-  // Returns a promise with 'this' Api object if server recognizes our
-  // id_token. Also profile will be filled out.
-  this.initialize = function () {
+  // Returns a promise with first_get_respone if server recognizes our
+  // id_token.
+  this.initialize = function (id_token_) {
+    id_token = id_token_;
+    log("initializing..");
     return query("get")
       .then(function (data) {
         if ("error" in data) {
           return Promise.reject(new Error(data.error));
         } else {
-          db = data.db;
-          current_user_index = data.current_user_index;
-          profile = data.db.userList[current_user_index];
-          return that;
+          log("healthy!");
+          return data;
         }
       });
-  };
-
-  this.getName = function () {
-    return profile.name;
   };
 };

@@ -1,25 +1,24 @@
-// uses GoogleAuth
-// dali da ova klasa vrati promise?
-//   pda.
-// dali onda da damo taj promise api-u?
-//   pitanje je tko ga zeli resolvat, mi ili api.
-//   bolje da ga mi resolvamo jer onda mozemo ne pozvat api uopce.
+// uses GoogleAuth client side flow.
 voronoi.Auth = function (
     log,
-    $authDiv,
-    $signInButton,
-    $revokeAccessButton,
-    $authStatus
-    ) {
+    ui,
+) {
 
   // The promise callbacks for getIdToken.
   var resolve = null;
   var reject = null;
 
+  var elems = ui.getAuthElements();
+  var $authDiv = elems.auth;
+  var $signInButton = elems.sign_in;
+  var $revokeAccessButton = elems.revoke;
+  var $authStatus = elems.auth_status;
+
   // Returns a promise that resolves into an id_token if the user is
   // authenticated successfully.
   // This is actually never rejected.
   this.getIdToken = function() {
+    log("initializing..");
     return new Promise(function (_resolve, _reject) {
       resolve = _resolve;
       reject = _reject;
@@ -95,6 +94,7 @@ voronoi.Auth = function (
       $authStatus.html(
           'You are currently signed in and have granted ' +
           'access to this app.');
+      log("healthy!");
       resolve(user.getAuthResponse().id_token);
       return true;
     } else {
